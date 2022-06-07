@@ -28,9 +28,9 @@ function Green2 () {
     }
 }
 input.onButtonPressed(Button.A, function () {
-    basic.pause(2000)
+    basic.pause(5000)
     Green()
-    basic.pause(1000)
+    basic.pause(2000)
     CLEAR()
     yelow()
     basic.pause(2000)
@@ -71,11 +71,12 @@ function Green3 () {
     basic.showIcon(IconNames.No)
 }
 input.onButtonPressed(Button.B, function () {
+    B = 0
     music.playTone(831, music.beat(BeatFraction.Half))
     music.playTone(740, music.beat(BeatFraction.Half))
-    basic.pause(2000)
+    basic.pause(5000)
     Green2()
-    basic.pause(1000)
+    basic.pause(2000)
     yelow()
     music.playMelody("- C5 B A G - - - ", 120)
     basic.pause(2000)
@@ -83,12 +84,12 @@ input.onButtonPressed(Button.B, function () {
 })
 function Censor () {
     for (let index = 0; index < 4; index++) {
-        pins.digitalWritePin(DigitalPin.P1, 0)
+        pins.digitalWritePin(DigitalPin.P8, 0)
         control.waitMicros(2)
-        pins.digitalWritePin(DigitalPin.P1, 1)
+        pins.digitalWritePin(DigitalPin.P8, 1)
         control.waitMicros(10)
-        pins.digitalWritePin(DigitalPin.P1, 0)
-        Distance = pins.pulseIn(DigitalPin.P2, PulseValue.High) / 58
+        pins.digitalWritePin(DigitalPin.P8, 0)
+        Distance = pins.pulseIn(DigitalPin.P13, PulseValue.High) / 58
         if (Distance == 5) {
             count2 += 1
         }
@@ -103,6 +104,7 @@ function Censor () {
         CLEAR()
         RED()
     }
+    count2 = 0
 }
 function CLEAR () {
     range = strip.range(0, 1)
@@ -140,15 +142,16 @@ function Green () {
         count += -1
     }
 }
+let B = 0
 let count = 0
 let range: neopixel.Strip = null
 let count2 = 0
 let strip: neopixel.Strip = null
 let Distance = 0
-Distance = 10
+Distance = 7
 radio.setGroup(199)
 basic.showIcon(IconNames.No)
-strip = neopixel.create(DigitalPin.P16, 3, NeoPixelMode.RGB)
+strip = neopixel.create(DigitalPin.P0, 3, NeoPixelMode.RGB)
 strip.setBrightness(30)
 RED()
 count2 = 0
